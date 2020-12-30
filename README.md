@@ -1,8 +1,8 @@
 # Getting Started with Widgets Builder Library
-This project was bootstrapped with ejected [Create React App](https://github.com/facebook/create-react-app).
-Before running an example, you have to build the project (see instructions bellow).
+This project was bootstrapped with ejected [Create React App](https://github.com/facebook/create-react-app).\
+Before running an example, you have to build the project (see instructions bellow).\
 The name of library is specified in package.json:
-```
+```javascript
 {
     ...
     "library": "wb",
@@ -11,7 +11,7 @@ The name of library is specified in package.json:
 ```
 
 ## Example of using Widgets Builder Library API
-```
+```javascript
       const {
           Logger,               // Logger service
           AppBuilder,           // application builder
