@@ -19,14 +19,14 @@ const widgetLanguageSwitcher = new WidgetBuilder()
     )
     .build();
 
-const widgetCurrentLanguage = new Api.WidgetBuilder()
+const widgetCurrentLanguage = new WidgetBuilder()
     .withChildren(CurrentLanguage)
     .withThemeSetEventHandler(theme => 
         Logger.debug(`Theme set event for widget2: '${theme}'`)
     )
     .build();
 
-const widgetContainer1 = new Api.WidgetBuilder()
+const widgetContainer1 = new WidgetBuilder()
     .withContainerId('widget-1')
     .withChildren(SwitchButton)
     .withThemeSetEventHandler(theme => 
@@ -86,13 +86,13 @@ const app = new AppBuilder()
     ])
     .build();
 
-const App = () => (
-  <>
-    { React.createElement(app.AppContainer) }
-  </>
-);
+// const App = () => (
+//   <>
+//     { React.createElement(app.AppContainer) }
+//   </>
+// );
 
-export default App;
+export default app.AppContainer;
 
 // Test API
 widgetContainer3.setTheme('blue');

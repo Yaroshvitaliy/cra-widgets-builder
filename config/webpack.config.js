@@ -155,6 +155,15 @@ module.exports = function (webpackEnv) {
     return loaders;
   };
 
+  const library = appPackageJson.library
+  const libraryFileName = appPackageJson.libraryFileName || 'bundle'
+
+  if (!library || typeof library !== 'string') {
+    throw new Error(
+      `Missing 'library' field in package.json, use for https://webpack.js.org/configuration/output/#output-library`
+    )
+  }
+
   return {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
@@ -190,7 +199,7 @@ module.exports = function (webpackEnv) {
             // initialization, it doesn't blow up the WebpackDevServer client, and
             // changing JS code would still trigger a refresh.
           ]
-        : paths.appIndexJs,
+        : paths.appIndexJs,       
     output: {
       // The build folder.
       path: isEnvProduction ? paths.appBuild : undefined,
@@ -199,13 +208,15 @@ module.exports = function (webpackEnv) {
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
       filename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].js'
+        //? 'static/js/[name].[contenthash:8].js'
+        ? 'static/js/[name].js'
         : isEnvDevelopment && 'static/js/bundle.js',
       // TODO: remove this when upgrading to webpack 5
       futureEmitAssets: true,
       // There are also additional JS chunk files if you use code splitting.
       chunkFilename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].chunk.js'
+        //? 'static/js/[name].[contenthash:8].chunk.js'
+        ? 'static/js/[name].chunk.js'
         : isEnvDevelopment && 'static/js/[name].chunk.js',
       // webpack uses `publicPath` to determine where the app is being served from.
       // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -225,6 +236,23 @@ module.exports = function (webpackEnv) {
       // this defaults to 'window', but by setting it to 'this' then
       // module chunks which are built will work in web workers as well.
       globalObject: 'this',
+      libraryTarget: 'umd',
+      library,
+      libraryExport: 'default'
+    },
+    externals:  {
+      react: {
+        commonjs: 'react',
+        amd: 'react',
+        root: 'React',
+        commonjs2: 'react'
+      },
+      'react-dom': {
+        commonjs: 'react-dom',
+        amd: 'react-dom',
+        root: 'ReactDOM',
+        commonjs2: 'react-dom'
+      }
     },
     optimization: {
       minimize: isEnvProduction,
@@ -632,8 +660,10 @@ module.exports = function (webpackEnv) {
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
           // both options are optional
-          filename: 'static/css/[name].[contenthash:8].css',
-          chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+          filename: 'static/css/[name].css',
+          //filename: 'static/css/[name].[contenthash:8].css',
+          chunkFilename: 'static/css/[name].chunk.css',
+          //chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
         }),
       // Generate an asset manifest file with the following content:
       // - "files" key: Mapping of all asset filenames to their corresponding
