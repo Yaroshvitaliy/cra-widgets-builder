@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.scss';
 import * as Logger from './services/logger';
 import Api from './api/index';
@@ -92,7 +91,7 @@ const app = new AppBuilder()
 //   </>
 // );
 
-export default app.AppContainer;
+export default app;
 
 // Test API
 widgetContainer3.setTheme('blue');

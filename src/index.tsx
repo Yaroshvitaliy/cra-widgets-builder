@@ -4,10 +4,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Api from './api/index';
 
-const { renderApp } = Api;
-
-if (document.getElementById('root')) {
-  renderApp(App, document.getElementById('root'));
+if (document.getElementById('dev-container')) {
+  App.render(document.getElementById('dev-container'));
 }
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,6 +1,114 @@
-# Getting Started with Create React App
+# Getting Started with Widgets Builder Library
+This project was bootstrapped with ejected [Create React App](https://github.com/facebook/create-react-app).
+Before running an example, you have to build the project (see instructions bellow).
+The name of library is specified in package.json:
+```
+{
+    ...
+    "library": "wb",
+    ...
+}
+```
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Example of using Widgets Builder Library API
+```
+      const {
+          Logger,               // Logger service
+          AppBuilder,           // application builder
+          WidgetBuilder,        // widget builder    
+          SwitchButtonBuilder,  // switch button component builder
+          CurrentLanguage,      // current language component
+          LanguageSwitcher,     // language switcher component
+          SwitchButton          // switch button component
+      } = wb;
+
+      const widgetLanguageSwitcher = new WidgetBuilder()
+          .withChildren(LanguageSwitcher)
+          .withThemeSetEventHandler(theme => 
+              Logger.debug(`Theme set event for widget1: '${theme}'`)
+          )
+          .build();
+
+      const widgetCurrentLanguage = new WidgetBuilder()
+          .withChildren(CurrentLanguage)
+          .withThemeSetEventHandler(theme => 
+              Logger.debug(`Theme set event for widget2: '${theme}'`)
+          )
+          .build();
+
+      const widgetContainer1 = new WidgetBuilder()
+          .withContainerId('container-1')
+          .withChildren(SwitchButton)
+          .withThemeSetEventHandler(theme => 
+              Logger.debug(`Theme set event for widget3: '${theme}'`)
+          )
+          .build();
+
+      const widgetContainer2 = new WidgetBuilder()
+          .withContainerId('container-2')
+          .withChildren(SwitchButton)
+          .withThemeSetEventHandler(theme => 
+              Logger.debug(`Theme set event for widget4: '${theme}'`)
+          )
+          .build();
+
+      const widgetContainer3 = new WidgetBuilder()
+          .withContainerId('container-3')
+          .withChildren(SwitchButton)
+          .withThemeSetEventHandler(theme => 
+              Logger.debug(`Theme set event for widget5: '${theme}'`)
+          )
+          .build();
+
+      const switchButton1 = new SwitchButtonBuilder()
+          .withChildren([
+              widgetContainer1.WidgetContainer, 
+              widgetContainer2.WidgetContainer
+          ])
+          .build();
+
+      const switchButton2 = new SwitchButtonBuilder()
+          .withChildren(widgetContainer3.WidgetContainer)
+          .build();
+
+      const switchButton3 = new SwitchButtonBuilder()
+          .withChildren([
+              SwitchButton, 
+              SwitchButton
+          ])
+          .build();
+
+      const app = new AppBuilder()
+          .withLanguage('en')
+          .withTheme('default')
+          .withLanguageSetEventHandler(language => 
+              Logger.debug(`Language set event: '${language}'`)
+          )
+          .withThemeSetEventHandler(theme => 
+              Logger.debug(`Theme set event: '${theme}'`)
+          )
+          .withChildren([ 
+              widgetLanguageSwitcher.WidgetContainer,
+              widgetCurrentLanguage.WidgetContainer,
+              switchButton1.SwitchButtonContainer,
+              switchButton2.SwitchButtonContainer,
+              switchButton3.SwitchButtonContainer
+          ])
+          .build();
+
+      app.render(document.getElementById('container'));
+
+      // Test API
+      widgetContainer3.setTheme('blue');
+
+      setTimeout(() => {
+          app.setLanguage('ru');
+          app.setTheme('light');
+          switchButton3.setEnabled(true);
+          widgetContainer3.setTheme('dark');
+      }, 3000);
+
+```
 
 ## Available Scripts
 
@@ -24,20 +132,10 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
 

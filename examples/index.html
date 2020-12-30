@@ -27,7 +27,6 @@
     <script src="../build/static/js/2.chunk.js"></script>
     <script>
       const {
-          renderApp,
           Logger,
           AppBuilder,
           WidgetBuilder,
@@ -111,7 +110,7 @@
           ])
           .build();
 
-      renderApp(app.AppContainer, document.getElementById('container'));
+      app.render(document.getElementById('container'));
 
       // Test API
       widgetContainer3.setTheme('blue');

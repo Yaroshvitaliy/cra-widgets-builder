@@ -1,9 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { AppContextProvider, IAppState, AppState, DefaultAppState } from '../contexts/AppContext';
 import { createChildren } from '../utils/index';
 
 export interface AppApi {
   AppContainer: () => JSX.Element;
+  render: (container: Element | DocumentFragment | null) => void;
   setLanguage: (language: string) => void;
   setTheme: (theme: string) => void;
 }
@@ -37,6 +39,14 @@ export class AppBuilder {
           </AppContextProvider>
         )
       };
+
+      const render = (container: Element | DocumentFragment | null) =>
+        ReactDOM.render(
+            <React.StrictMode>
+                <AppContainer />
+            </React.StrictMode>,
+            container || document.createElement('div')
+        );
       
       const setLanguage = () => (language: string)  => {
         const { setLanguageState } = this.props.appState || {};
@@ -49,6 +59,7 @@ export class AppBuilder {
       };
 
       const api: AppApi = {
+        render,
         AppContainer,
         setLanguage,
         setTheme
