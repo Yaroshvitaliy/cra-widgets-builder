@@ -75,6 +75,7 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "devDependencies": {
+    "documentation": "^13.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
@@ -85,7 +86,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "docs:api": "documentation build src/api/*.tsx --parse-extension tsx -f md -o docs/api.md"
   },
   "eslintConfig": {
     "extends": [

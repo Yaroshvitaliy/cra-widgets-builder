@@ -1,13 +1,24 @@
 const phrases: any = {
     en: {
-        generate: 'Generate',
         on: 'On',
         off: 'Off'
     },
+    es: {
+        on: 'Encendido',
+        off: 'Apagado'
+    },
+    pt: {
+        on: 'Ligado',
+        off: 'Desligado'
+    },
+    fr: {
+        on: 'Allumé',
+        off: 'Éteint'
+    },
+
     ru: {
-        generate: 'Сгенерировать',
-        on: 'Вкл',
-        off: 'Выкл'
+        on: 'Включить',
+        off: 'Выключить'
     }
 }
 

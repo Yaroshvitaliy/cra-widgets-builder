@@ -1,3 +1,7 @@
+$green-color: #4bd763;
+$blue-color: #3b89ec;
+$default-color: $green-color;
+
 .switch {
   display: inline-block;
   cursor: pointer;
@@ -50,7 +54,9 @@
   
   & input { display: none; }
   
-  & input:checked + i { background-color: #4BD763; }
+  & input:checked + i { background-color: $default-color; }
+  &.green input:checked + i { background-color: $green-color; }
+  &.blue input:checked + i { background-color: $blue-color; }
   
   & input:checked + i::before { transform: translate3d(18px, 2px, 0) scale3d(0, 0, 0); }
   

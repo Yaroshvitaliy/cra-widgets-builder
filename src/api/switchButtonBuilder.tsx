@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
  import { 
   SwitchButtonContextProvider, 
   ISwitchButtonState, 
@@ -7,9 +8,36 @@ import React from 'react';
 } from '../contexts/SwitchButtonContext';
 import { createChildren } from '../utils/index';
 
+/**
+ * The Switch Button API.
+ */
 export interface SwitchButtonApi {
-  SwitchButtonContainer: () => JSX.Element;
-  setEnabled: (enabled: boolean) => void;
+  /**
+   * The component to be rendered.
+   */
+  Component: () => JSX.Element;
+
+  /**
+   * Renderes the component.
+   * 
+   * @param {Element | DocumentFragment | null} container The container. Optional parameter.
+   */
+  render: (container: Element | DocumentFragment | null) => void;
+
+  /**
+   * Gets the state of the switch button.
+   */
+  getState: () => boolean;
+
+  /**
+   * Sets the state of the switch button.
+   */
+  setState: (state: boolean) => void;
+
+  /**
+   * Toggles the state of the switch button.
+   */
+  toggleState: () => void;
 }
 
 interface IComponentProps {
@@ -19,6 +47,9 @@ interface IComponentProps {
   enabledSetEvent?: (enabled: boolean) => void;
 }
 
+/**
+ * Helps to build the Switch Button API.
+ */
 export class SwitchButtonBuilder {
     private props: IComponentProps = {
       children: () => [],
@@ -27,8 +58,13 @@ export class SwitchButtonBuilder {
       enabledSetEvent: undefined
     };
 
+    /**
+     * Builds the Switch Button API.
+     * 
+     * @returns {SwitchButtonApi} The Switch Button API.
+     */
     build() {
-      const SwitchButtonContainer = () => {
+      const Component = () => {
         this.props.switchButtonState = SwitchButtonState({ enabled: this.props.enabled });
         const { children, enabled, ...rest } = this.props;
         return (
@@ -38,30 +74,68 @@ export class SwitchButtonBuilder {
         );
       };
 
-      const setEnabled = (enabled: boolean)  => {
+      const render = (container: Element | DocumentFragment | null) =>
+        ReactDOM.render(
+            <React.StrictMode>
+                <Component />
+            </React.StrictMode>,
+            container || document.createElement('div')
+        );
+
+      const getState = () => {
+        const { enabledState } = this.props.switchButtonState || {};
+        return enabledState;
+      }
+
+      const setState = (enabled: boolean)  => {
         const { setEnabledState } = this.props.switchButtonState || {};
-        setEnabledState && setEnabledState(enabled)
+        setEnabledState && setEnabledState(enabled);
       };
 
+      const toggleState = () => {
+        const { enabledState, setEnabledState } = this.props.switchButtonState || {};
+        setEnabledState && setEnabledState(!enabledState);
+      }
+
       const api: SwitchButtonApi = {
-        SwitchButtonContainer,
-        setEnabled
+        Component,
+        render,
+        getState,
+        setState,
+        toggleState
       };
 
       return api;
     }
 
+    /**
+     * Sets the children.
+     * 
+     * @param {() => JSX.Element) | (Array<() => JSX.Element>)} children The children.
+     */
     withChildren(children: (() => JSX.Element) | (Array<() => JSX.Element>)) {
       this.props.children = createChildren(children);
       return this;
     }
 
+    /**
+     * Sets the state of the Switch Button.
+     * false is 'off' state, true is 'on' state.
+     * Default value: false ('off').
+     * 
+     * @param {boolean} enabled The state of the Switch Button.
+     */
     withEnabled(enabled: boolean) {
       this.props.enabled = enabled;
       return this;
     }
 
-    withThemeSetEventHandler(enabledSetEvent: (enabled: boolean) => void) {
+    /**
+     * Sets the enabled set event handler.
+     * 
+     * @param {(enabled: boolean) => void} enabledSetEvent The enabled set event.
+     */
+    withEnabledSetEventHandler(enabledSetEvent: (enabled: boolean) => void) {
       this.props.enabledSetEvent = enabledSetEvent;
       return this;
     }
