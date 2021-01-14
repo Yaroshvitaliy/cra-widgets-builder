@@ -12,14 +12,15 @@ The name of library is specified in package.json:
 ```
 
 ## Example of using Widgets Builder Library API
+#### index.html
 ```html
-    <div id="app-language-switcher"></div>
-    <div id="app-current-language"></div>
-    <div id="app-widget-1"></div>
-    <div id="app-widget-2"></div>
-    <div id="app-widget-3"></div>
+<div id="app-language-switcher"></div>
+<div id="app-current-language"></div>
+<div id="app-widget-1"></div>
+<div id="app-widget-2"></div>
+<div id="app-widget-3"></div>
 ```
-
+#### index.js
 ```javascript
 const {
     Logger,               // logger service
