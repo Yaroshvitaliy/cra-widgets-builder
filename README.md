@@ -1,5 +1,5 @@
 # Getting Started with Widgets Builder Library
-Widgets Builder Library helps to build widgets that behave like an application and embed them into any place in html document.
+Widgets Builder Library helps to build widgets that behave like an application and embed them into any place in html document.\
 This project was bootstrapped with ejected [Create React App](https://github.com/facebook/create-react-app).\
 Before running an example, you have to build the project (see instructions bellow).\
 The name of library is specified in package.json:
@@ -150,7 +150,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `yarn docs:api`
 
 Generates documentation of the API and saves it in `docs/api.md` file.\
-Based on JSDoc markup comments of the code.
+Based on JSDoc markup comments in the code.
 
 ## Learn More
 
