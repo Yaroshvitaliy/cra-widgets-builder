@@ -116,7 +116,7 @@ setTimeout(() => {
 
     Logger.debug(`Current language: '${app.getLanguage()}'`);
     Logger.debug(`Current theme: '${app.getTheme()}'`);
-    Logger.debug(`Current state of switchButton3: ${switchButton3.getState() ? 'off': 'on'}`);
+    Logger.debug(`Current state of switchButton3: ${switchButton3.getState() ? 'on': 'off'}`);
 }, 3000);
 ```
 
