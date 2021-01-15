@@ -110,13 +110,13 @@ widget3.setTheme('blue');
 Logger.debug(`Current theme of widget3: '${widget3.getTheme()}'`);
 
 setTimeout(() => {
-app.setLanguage('pt');
-app.setTheme('light');
-switchButton3.setState(true);
+    app.setLanguage('pt');
+    app.setTheme('light');
+    switchButton3.setState(true);
 
-Logger.debug(`Current language: '${app.getLanguage()}'`);
-Logger.debug(`Current theme: '${app.getTheme()}'`);
-Logger.debug(`Current state of switchButton3: ${switchButton3.getState() ? 'off': 'on'}`);
+    Logger.debug(`Current language: '${app.getLanguage()}'`);
+    Logger.debug(`Current theme: '${app.getTheme()}'`);
+    Logger.debug(`Current state of switchButton3: ${switchButton3.getState() ? 'off': 'on'}`);
 }, 3000);
 ```
 
