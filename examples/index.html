@@ -5,8 +5,179 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Widgets Builder Examples" />
     <title>Widgets Builder Examples</title>
+    <link href="../build/static/css/wb.css" rel="stylesheet">
+    <style>
+      body {
+          background-color: #ddd
+      }
+
+      body[data-theme=light] {
+          background-color: #fff
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <h2 id="builders">Builders</h2>
+
+    <!-- SwitchButton Builder -->
+    <section>
+      <h3>SwitchButton Builder</h3>
+
+      <div id="switch-button-container"></div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function(event) { 
+          const { SwitchButton, SwitchButtonBuilder } = wb;
+
+          const switchButton = new SwitchButtonBuilder()
+            .withChildren(SwitchButton)
+            .build();
+          
+          switchButton.render(document.getElementById('switch-button-container'));
+        });
+      </script>
+    </section>
+
+    <!-- Widget Builder -->
+    <section>
+      <h3>Widget Builder</h3>
+
+      <div id="widget-container"></div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function(event) {
+          const { SwitchButton, SwitchButtonBuilder, WidgetBuilder } = wb;
+
+          const widgetChild = new SwitchButtonBuilder()
+            .withChildren(SwitchButton)
+            .build();
+
+          const widget = new WidgetBuilder()
+            .withChildren(widgetChild.Component)
+            .withContainer(document.getElementById('widget-container'))
+            .build();
+          
+          widget.render();
+        });
+      </script>
+    </section>
+    
+    <!-- App Builder -->
+    <section>
+      <h3>App Builder</h3>
+
+      <div id="app-language-switcher"></div>
+      <div id="app-current-language"></div>
+      <div id="app-widget-1"></div>
+      <div id="app-widget-2"></div>
+      <div id="app-widget-3"></div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function(event) {
+          const {
+              Logger,               // logger service
+              AppBuilder,           // application builder
+              WidgetBuilder,        // widget builder    
+              SwitchButtonBuilder,  // switch button component builder
+              CurrentLanguage,      // current language component
+              LanguageSwitcher,     // language switcher component
+              SwitchButton          // switch button component
+          } = wb;
+
+          // Build Language Switcher Widget
+          const widgetLanguageSwitcher = new WidgetBuilder()
+            .withChildren(LanguageSwitcher)
+            .withContainer(document.getElementById('app-language-switcher'))
+            .build();
+
+          // Build Current Language Widget
+          const widgetCurrentLanguage = new WidgetBuilder()
+            .withChildren(CurrentLanguage)
+            .withContainer(document.getElementById('app-current-language'))
+            .build();
+
+          // Build Switch Button Widget 1
+          const switchButton1 = new SwitchButtonBuilder()
+            .withChildren(SwitchButton)
+            .build();
+
+          const widget1 = new WidgetBuilder()
+            .withChildren(switchButton1.Component)
+            .withContainer(document.getElementById('app-widget-1'))
+            .build();
+
+          // Build Switch Button Widget 2
+          const switchButton2 = new SwitchButtonBuilder()
+            .withChildren(SwitchButton)
+            .build();
+
+          const widget2 = new WidgetBuilder()
+            .withChildren(switchButton2.Component)
+            .withContainer(document.getElementById('app-widget-2'))
+            .build();
+
+          // Build Switch Button Widget 3
+          const switchButton3 = new SwitchButtonBuilder()
+            .withChildren([SwitchButton, SwitchButton])
+            .build();
+
+          const widget3 = new WidgetBuilder()
+            .withChildren([switchButton3.Component])
+            .withContainer(document.getElementById('app-widget-3'))
+            .build();
+          
+          // Build App
+          const app = new AppBuilder()
+            .withLanguage('en')
+            .withTheme('default')
+            .withLanguageSetEventHandler(language => 
+              Logger.debug(`Language set event: '${language}'`)
+            )
+            .withThemeSetEventHandler(theme => {
+              Logger.debug(`Theme set event: '${theme}'`);
+              document.body.dataset.theme = theme;
+            })
+            .withChildren([
+              widgetLanguageSwitcher.Component,
+              widgetCurrentLanguage.Component,
+              widget1.Component,
+              widget2.Component,
+              widget3.Component
+            ])
+            .build();
+  
+          // Render app
+          app.render();
+  
+          // Test API
+          Logger.debug(`Current language: '${app.getLanguage()}'`);
+          Logger.debug(`Current theme: '${app.getTheme()}'`);
+          Logger.debug(`Current state of switchButton3: ${switchButton3.getState() ? 'on' : 'off'}`);
+
+          Logger.debug(`Current theme of widget3: '${widget3.getTheme()}'`);
+
+          switchButton2.toggleState();
+          widget3.setTheme('blue');
+
+          Logger.debug(`Current theme of widget3: '${widget3.getTheme()}'`);
+  
+          setTimeout(() => {
+            app.setLanguage('pt');
+            app.setTheme('light');
+            switchButton3.setState(true);
+
+            Logger.debug(`Current language: '${app.getLanguage()}'`);
+            Logger.debug(`Current theme: '${app.getTheme()}'`);
+            Logger.debug(`Current state of switchButton3: ${switchButton3.getState() ? 'off': 'on'}`);
+          }, 3000);
+        });
+      </script>
+    </section>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.production.min.js" integrity="sha512-YMtLFKDKe5a4zi7rJ0y4wdGErKZe3tx7L+AXDTxjNDzkv7jsaNhvumeU1xQvw6UqVwBVmYlO9NhsSuSVPUN/xQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.production.min.js" integrity="sha512-vN6rbu+vWW4Ck3s6RbLZs+0gRl5PWOZRUqap38gZtsheSqA2zDeI3PCshuxfYx7ytkoFMrmd0gA2sZZeP1RZYQ==" crossorigin="anonymous"></script>
+    <script src="../build/static/js/wb.js"></script>
   </body>
 </html>

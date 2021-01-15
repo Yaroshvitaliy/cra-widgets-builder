@@ -53,7 +53,7 @@
         -   [Parameters][49]
     -   [withThemeSetEventHandler][50]
         -   [Parameters][51]
-    -   [withContainerId][52]
+    -   [withContainer][52]
         -   [Parameters][53]
 
 ## AppApi
@@ -301,13 +301,13 @@ Sets the theme set event handler.
 
 -   `themeSetEvent` **function (theme: [string][56]): void** 
 
-### withContainerId
+### withContainer
 
-Sets the container id.
+Sets the container the widget will be rendered in.
 
 #### Parameters
 
--   `containerId` **[string][56]** The container id.
+-   `container` **[string][56]** The container.
 
 [1]: #appapi
 
@@ -411,7 +411,7 @@ Sets the container id.
 
 [51]: #parameters-15
 
-[52]: #withcontainerid
+[52]: #withcontainer
 
 [53]: #parameters-16
 

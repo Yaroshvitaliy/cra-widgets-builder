@@ -35,13 +35,13 @@ const {
 // Build Language Switcher Widget
 const widgetLanguageSwitcher = new WidgetBuilder()
     .withChildren(LanguageSwitcher)
-    .withContainerId('app-language-switcher')
+    .withContainer(document.getElementById('app-language-switcher'))
     .build();
 
 // Build Current Language Widget
 const widgetCurrentLanguage = new WidgetBuilder()
     .withChildren(CurrentLanguage)
-    .withContainerId('app-current-language')
+    .withContainer(document.getElementById('app-current-language'))
     .build();
 
 // Build Switch Button Widget 1
@@ -51,7 +51,7 @@ const switchButton1 = new SwitchButtonBuilder()
 
 const widget1 = new WidgetBuilder()
     .withChildren(switchButton1.Component)
-    .withContainerId('app-widget-1')
+    .withContainer(document.getElementById('app-widget-1'))
     .build();
 
 // Build Switch Button Widget 2
@@ -61,7 +61,7 @@ const switchButton2 = new SwitchButtonBuilder()
 
 const widget2 = new WidgetBuilder()
     .withChildren(switchButton2.Component)
-    .withContainerId('app-widget-2')
+    .withContainer(document.getElementById('app-widget-2'))
     .build();
 
 // Build Switch Button Widget 3
@@ -71,7 +71,7 @@ const switchButton3 = new SwitchButtonBuilder()
 
 const widget3 = new WidgetBuilder()
     .withChildren([switchButton3.Component])
-    .withContainerId('app-widget-3')
+    .withContainer(document.getElementById('app-widget-3'))
     .build();
 
 // Build App
@@ -110,13 +110,13 @@ widget3.setTheme('blue');
 Logger.debug(`Current theme of widget3: '${widget3.getTheme()}'`);
 
 setTimeout(() => {
-    app.setLanguage('pt');
-    app.setTheme('light');
-    switchButton3.setState(true);
+app.setLanguage('pt');
+app.setTheme('light');
+switchButton3.setState(true);
 
-    Logger.debug(`Current language: '${app.getLanguage()}'`);
-    Logger.debug(`Current theme: '${app.getTheme()}'`);
-    Logger.debug(`Current state of switchButton3: ${switchButton3.getState() ? 'off': 'on'}`);
+Logger.debug(`Current language: '${app.getLanguage()}'`);
+Logger.debug(`Current theme: '${app.getTheme()}'`);
+Logger.debug(`Current state of switchButton3: ${switchButton3.getState() ? 'off': 'on'}`);
 }, 3000);
 ```
 

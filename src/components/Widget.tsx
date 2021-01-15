@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 
 interface IWidgetProps {
     children: React.ReactNode;
-    containerId?: string;
+    container?: Element | null;
   }
 
-const Widget = ({ children, containerId }: IWidgetProps) => {
-    const containerElement = containerId && document.getElementById(containerId);
+const Widget = ({ children, container }: IWidgetProps) => {
+
     return (
         <>
-            { containerElement && ReactDOM.createPortal(children, containerElement) }    
-            { !containerElement && children}
+            { container && ReactDOM.createPortal(children, container) }    
+            { !container && children}
         </>
 )};
 

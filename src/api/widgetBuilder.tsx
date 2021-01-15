@@ -36,7 +36,7 @@ interface IComponentProps {
   widgetState: IWidgetState,
   theme?: string;
   themeSetEvent?: (theme: string) => void;
-  containerId?: string;
+  container?: Element | null;
 }
 
 /**
@@ -48,7 +48,7 @@ export class WidgetBuilder {
       widgetState: DefaultWidgetState,
       theme: undefined,
       themeSetEvent: undefined,
-      containerId: undefined
+      container: undefined
     };
 
     /**
@@ -59,11 +59,11 @@ export class WidgetBuilder {
     build() {
       const Component = () => {
         this.props.widgetState = WidgetState({ theme: this.props.theme });
-        const { children, containerId, theme, ...rest } = this.props;
+        const { children, container, theme, ...rest } = this.props;
       
         return (
           <WidgetContextProvider {...rest}>
-              <Widget containerId={containerId}>
+              <Widget container={container}>
                 {children}
               </Widget>
           </WidgetContextProvider>
@@ -130,12 +130,12 @@ export class WidgetBuilder {
     }
 
     /**
-     * Sets the container id.
+     * Sets the container the widget will be rendered in.
      * 
-     * @param {string} containerId The container id.
+     * @param {string} container The container.
      */
-    withContainerId(containerId: string) {
-      this.props.containerId = containerId;
+    withContainer(container: Element | null) {
+      this.props.container = container;
       return this;
     }
   }
