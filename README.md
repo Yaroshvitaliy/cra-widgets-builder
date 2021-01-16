@@ -29,57 +29,57 @@ The name of library is specified in package.json:
 #### index.js
 ```javascript
 const {
-    Logger,               // logger service
-    AppBuilder,           // application builder
-    WidgetBuilder,        // widget builder    
-    SwitchButtonBuilder,  // switch button component builder
-    CurrentLanguage,      // current language component
-    LanguageSwitcher,     // language switcher component
-    SwitchButton          // switch button component
+    Logger,                     // logger service
+    AppContextBuilder,          // application context builder
+    WidgetContextBuilder,       // widget context builder    
+    SwitchButtonContextBuilder, // switch button context builder
+    CurrentLanguage,            // current language component
+    LanguageSwitcher,           // language switcher component
+    SwitchButton                // switch button component
 } = wb;
 
-// Build Language Switcher Widget
-const widgetLanguageSwitcher = new WidgetBuilder()
+// Build Language Switcher Widget Context
+const languageSwitcherWidgetContext = new WidgetContextBuilder()
     .withChildren(LanguageSwitcher)
-    .withContainer(document.getElementById('app-language-switcher'))
+    .withContainer(document.getElementById('app-language-switcher-container'))
     .build();
 
-// Build Current Language Widget
-const widgetCurrentLanguage = new WidgetBuilder()
+// Build Current Language Widget Context
+const currentLanguageWidgetContext = new WidgetContextBuilder()
     .withChildren(CurrentLanguage)
-    .withContainer(document.getElementById('app-current-language'))
+    .withContainer(document.getElementById('app-current-language-container'))
     .build();
 
-// Build Switch Button Widget 1
-const widget1 = new WidgetBuilder()
+// Build Widget Context 1
+const widgetContext1 = new WidgetContextBuilder()
     .withChildren(SwitchButton)
-    .withContainer(document.getElementById('app-switch-button-widget-1'))
+    .withContainer(document.getElementById('app-widget-1-container'))
     .build();
 
-// Build Switch Button Widget 2
-const widget2 = new WidgetBuilder()
+// Build Widget Context 2
+const widgetContext2 = new WidgetContextBuilder()
     .withChildren(SwitchButton)
-    .withContainer(document.getElementById('app-switch-button-widget-2'))
+    .withContainer(document.getElementById('app-widget-2-container'))
     .build();
 
-// Build Switch Button Widget 3
-const widget3 = new WidgetBuilder()
+// Build Widget Context 3
+const widgetContext3 = new WidgetContextBuilder()
     .withChildren(SwitchButton)
-    .withContainer(document.getElementById('app-switch-button-widget-3'))
+    .withContainer(document.getElementById('app-widget-3-container'))
     .build();
 
-// Build Switch Button 1
-const switchButton1 = new SwitchButtonBuilder()
-    .withChildren(widget1.Component)
+// Build Switch Button Context 1
+const switchButtonContext1 = new SwitchButtonContextBuilder()
+    .withChildren(widgetContext1.Component)
     .build();            
 
-// Build Switch Button 2
-const switchButton2 = new SwitchButtonBuilder()
-    .withChildren([widget2.Component, widget3.Component])
+// Build Switch Button Context 2
+const switchButtonContext2 = new SwitchButtonContextBuilder()
+    .withChildren([widgetContext2.Component, widgetContext3.Component])
     .build();
 
-// Build App
-const app = new AppBuilder()
+// Build App Context
+const appContext = new AppContextBuilder()
     .withLanguage('en')
     .withTheme('default')
     .withLanguageSetEventHandler(language => 
@@ -90,35 +90,35 @@ const app = new AppBuilder()
         document.body.dataset.theme = theme;
     })
     .withChildren([
-        widgetLanguageSwitcher.Component,
-        widgetCurrentLanguage.Component,
-        switchButton1.Component,
-        switchButton2.Component
+        languageSwitcherWidgetContext.Component,
+        currentLanguageWidgetContext.Component,
+        switchButtonContext1.Component,
+        switchButtonContext2.Component
     ])
     .build();
 
 // Render app
-app.render();
+appContext.render();
 
 // Test API
-Logger.debug(`Current language: '${app.getLanguage()}'`);
-Logger.debug(`Current theme: '${app.getTheme()}'`);
-Logger.debug(`Current state of switchButton2: ${switchButton2.getState() ? 'on' : 'off'}`);
+Logger.debug(`Current language: '${appContext.getLanguage()}'`);
+Logger.debug(`Current theme: '${appContext.getTheme()}'`);
+Logger.debug(`Current state of switchButton2: ${switchButtonContext2.getState() ? 'on' : 'off'}`);
 
-Logger.debug(`Current theme of widget3: '${widget3.getTheme()}'`);
+Logger.debug(`Current theme of widget3: '${widgetContext3.getTheme()}'`);
 
-widget3.setTheme('blue');
+widgetContext3.setTheme('blue');
 
-Logger.debug(`Current theme of widget3: '${widget3.getTheme()}'`);
+Logger.debug(`Current theme of widget3: '${widgetContext3.getTheme()}'`);
 
 setTimeout(() => {
-    app.setLanguage('pt');
-    app.setTheme('light');
-    switchButton2.toggleState();
+    appContext.setLanguage('pt');
+    appContext.setTheme('light');
+    switchButtonContext2.toggleState();
 
-    Logger.debug(`Current language: '${app.getLanguage()}'`);
-    Logger.debug(`Current theme: '${app.getTheme()}'`);
-    Logger.debug(`Current state of switchButton2: ${switchButton2.getState() ? 'on': 'off'}`);
+    Logger.debug(`Current language: '${appContext.getLanguage()}'`);
+    Logger.debug(`Current theme: '${appContext.getTheme()}'`);
+    Logger.debug(`Current state of switchButton2: ${switchButtonContext2.getState() ? 'on': 'off'}`);
 }, 3000);
 ```
 

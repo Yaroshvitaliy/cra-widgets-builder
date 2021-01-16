@@ -55,8 +55,8 @@ $default-color: $green-color;
   & input { display: none; }
   
   & input:checked + i { background-color: $default-color; }
-  &.green input:checked + i { background-color: $green-color; }
-  &.blue input:checked + i { background-color: $blue-color; }
+  &.theme.theme-green input:checked + i { background-color: $green-color; }
+  &.theme.theme-blue input:checked + i { background-color: $blue-color; }
   
   & input:checked + i::before { transform: translate3d(18px, 2px, 0) scale3d(0, 0, 0); }
   

@@ -2,7 +2,7 @@
 
 ### Table of Contents
 
--   [AppApi][1]
+-   [AppContext][1]
     -   [Component][2]
     -   [render][3]
         -   [Parameters][4]
@@ -12,7 +12,7 @@
     -   [getTheme][8]
     -   [setTheme][9]
         -   [Parameters][10]
--   [AppBuilder][11]
+-   [AppContextBuilder][11]
     -   [build][12]
     -   [withChildren][13]
         -   [Parameters][14]
@@ -24,14 +24,14 @@
         -   [Parameters][20]
     -   [withThemeSetEventHandler][21]
         -   [Parameters][22]
--   [SwitchButtonApi][23]
+-   [SwitchButtonContext][23]
     -   [Component][24]
     -   [render][25]
         -   [Parameters][26]
     -   [getState][27]
     -   [setState][28]
     -   [toggleState][29]
--   [SwitchButtonBuilder][30]
+-   [SwitchButtonContextBuilder][30]
     -   [build][31]
     -   [withChildren][32]
         -   [Parameters][33]
@@ -39,13 +39,13 @@
         -   [Parameters][35]
     -   [withEnabledSetEventHandler][36]
         -   [Parameters][37]
--   [WidgetApi][38]
+-   [WidgetContext][38]
     -   [Component][39]
     -   [render][40]
         -   [Parameters][41]
     -   [getTheme][42]
     -   [setTheme][43]
--   [WidgetBuilder][44]
+-   [WidgetContextBuilder][44]
     -   [build][45]
     -   [withChildren][46]
         -   [Parameters][47]
@@ -56,9 +56,9 @@
     -   [withContainer][52]
         -   [Parameters][53]
 
-## AppApi
+## AppContext
 
-The Application API.
+The Application Context.
 
 ### Component
 
@@ -108,19 +108,20 @@ Type: function (theme: [string][56]): void
 
 -   `theme` **[string][56]** The theme.
 
-## AppBuilder
+## AppContextBuilder
 
-Helps to build the Application API.
+Helps to build the Application Context and manage its state.
 
 ### build
 
-Builds the Application API.
+Builds the Application Context.
 
-Returns **[AppApi][57]** The Application API.
+Returns **[AppContext][57]** The Application Context.
 
 ### withChildren
 
 Sets the children.
+All the children within the context will have the same state (language, theme).
 
 #### Parameters
 
@@ -160,9 +161,9 @@ Sets the theme set event handler.
 
 -   `themeSetEvent` **function (theme: [string][56]): void** 
 
-## SwitchButtonApi
+## SwitchButtonContext
 
-The Switch Button API.
+The Switch Button Context.
 
 ### Component
 
@@ -198,19 +199,20 @@ Toggles the state of the switch button.
 
 Type: function (): void
 
-## SwitchButtonBuilder
+## SwitchButtonContextBuilder
 
-Helps to build the Switch Button API.
+Helps to build the Switch Button Context and manage its state.
 
 ### build
 
-Builds the Switch Button API.
+Builds the Switch Button Context.
 
-Returns **[SwitchButtonApi][60]** The Switch Button API.
+Returns **[SwitchButtonContext][60]** The Switch Button Context.
 
 ### withChildren
 
 Sets the children.
+All the children within the context will have the same state.
 
 #### Parameters
 
@@ -234,9 +236,9 @@ Sets the enabled set event handler.
 
 -   `enabledSetEvent` **function (enabled: [boolean][59]): void** 
 
-## WidgetApi
+## WidgetContext
 
-The widget API.
+The widget Context.
 
 ### Component
 
@@ -266,19 +268,20 @@ Sets the theme.
 
 Type: function (theme: [string][56]): void
 
-## WidgetBuilder
+## WidgetContextBuilder
 
-Helps to build the widget API.
+Helps to build the widget Contex and manage its state.
 
 ### build
 
-Builds the widget API.
+Builds the Widget Context.
 
-Returns **[WidgetApi][61]** The Widget API.
+Returns **[WidgetContext][61]** The Widget Context.
 
 ### withChildren
 
 Sets the children.
+All the children within the context will have the same state (container, theme).
 
 #### Parameters
 
@@ -309,7 +312,7 @@ Sets the container the widget will be rendered in.
 
 -   `container` **[string][56]** The container.
 
-[1]: #appapi
+[1]: #appcontext
 
 [2]: #component
 
@@ -329,7 +332,7 @@ Sets the container the widget will be rendered in.
 
 [10]: #parameters-2
 
-[11]: #appbuilder
+[11]: #appcontextbuilder
 
 [12]: #build
 
@@ -353,7 +356,7 @@ Sets the container the widget will be rendered in.
 
 [22]: #parameters-7
 
-[23]: #switchbuttonapi
+[23]: #switchbuttoncontext
 
 [24]: #component-1
 
@@ -367,7 +370,7 @@ Sets the container the widget will be rendered in.
 
 [29]: #togglestate
 
-[30]: #switchbuttonbuilder
+[30]: #switchbuttoncontextbuilder
 
 [31]: #build-1
 
@@ -383,7 +386,7 @@ Sets the container the widget will be rendered in.
 
 [37]: #parameters-11
 
-[38]: #widgetapi
+[38]: #widgetcontext
 
 [39]: #component-2
 
@@ -395,7 +398,7 @@ Sets the container the widget will be rendered in.
 
 [43]: #settheme-1
 
-[44]: #widgetbuilder
+[44]: #widgetcontextbuilder
 
 [45]: #build-2
 
@@ -421,12 +424,12 @@ Sets the container the widget will be rendered in.
 
 [56]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[57]: #appapi
+[57]: #appcontext
 
 [58]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 [59]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[60]: #switchbuttonapi
+[60]: #switchbuttoncontext
 
-[61]: #widgetapi
+[61]: #widgetcontext

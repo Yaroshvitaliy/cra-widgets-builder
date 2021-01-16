@@ -5,9 +5,9 @@ import Widget from '../components/Widget';
 import { createChildren } from '../utils/index';
 
 /**
- * The widget API.
+ * The widget Context.
  */
-export interface WidgetApi {
+export interface WidgetContext {
   /**
    * The component to be rendered.
    */
@@ -40,9 +40,9 @@ interface IComponentProps {
 }
 
 /**
- * Helps to build the widget API.
+ * Helps to build the widget Contex and manage its state.
  */
-export class WidgetBuilder {
+export class WidgetContextBuilder {
     private props: IComponentProps = {
       children: () => [],
       widgetState: DefaultWidgetState,
@@ -52,9 +52,9 @@ export class WidgetBuilder {
     };
 
     /**
-     * Builds the widget API.
+     * Builds the Widget Context.
      * 
-     * @returns {WidgetApi} The Widget API.
+     * @returns {WidgetContext} The Widget Context.
      */
     build() {
       const Component = () => {
@@ -88,18 +88,19 @@ export class WidgetBuilder {
         setThemeState && setThemeState(theme);
       };
 
-      const api: WidgetApi = {
+      const context: WidgetContext = {
         Component,
         render,
         getTheme,
         setTheme
       };
 
-      return api;
+      return context;
     }
 
     /**
      * Sets the children.
+     * All the children within the context will have the same state (container, theme).
      * 
      * @param {() => JSX.Element) | (Array<() => JSX.Element>)} children The children.
      */
@@ -140,4 +141,4 @@ export class WidgetBuilder {
     }
   }
 
-export default WidgetBuilder;
+export default WidgetContextBuilder;

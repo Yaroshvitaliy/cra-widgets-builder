@@ -9,9 +9,9 @@ import ReactDOM from 'react-dom';
 import { createChildren } from '../utils/index';
 
 /**
- * The Switch Button API.
+ * The Switch Button Context.
  */
-export interface SwitchButtonApi {
+export interface SwitchButtonContext {
   /**
    * The component to be rendered.
    */
@@ -48,9 +48,9 @@ interface IComponentProps {
 }
 
 /**
- * Helps to build the Switch Button API.
+ * Helps to build the Switch Button Context and manage its state.
  */
-export class SwitchButtonBuilder {
+export class SwitchButtonContextBuilder {
     private props: IComponentProps = {
       children: () => [],
       switchButtonState: DefaultSwitchButtonState,
@@ -59,9 +59,9 @@ export class SwitchButtonBuilder {
     };
 
     /**
-     * Builds the Switch Button API.
+     * Builds the Switch Button Context.
      * 
-     * @returns {SwitchButtonApi} The Switch Button API.
+     * @returns {SwitchButtonContext} The Switch Button Context.
      */
     build() {
       const Component = () => {
@@ -97,7 +97,7 @@ export class SwitchButtonBuilder {
         setEnabledState && setEnabledState(!enabledState);
       }
 
-      const api: SwitchButtonApi = {
+      const context: SwitchButtonContext = {
         Component,
         render,
         getState,
@@ -105,11 +105,12 @@ export class SwitchButtonBuilder {
         toggleState
       };
 
-      return api;
+      return context;
     }
 
     /**
      * Sets the children.
+     * All the children within the context will have the same state.
      * 
      * @param {() => JSX.Element) | (Array<() => JSX.Element>)} children The children.
      */
@@ -141,4 +142,4 @@ export class SwitchButtonBuilder {
     }
   }
 
-export default SwitchButtonBuilder;
+export default SwitchButtonContextBuilder;

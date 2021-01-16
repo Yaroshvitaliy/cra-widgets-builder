@@ -5,6 +5,10 @@ import { SwitchButtonContext } from '../contexts/SwitchButtonContext';
 import translate from '../services/translationService';
 import './SwitchButton.scss';
 
+/**
+ * The Switch Button Component.
+ * Must reside inside the @see {AppContext}, the @see {SwitchButtonContext}, the @see {WidgetContext}.
+ */
 const SwitchButton = () => {
     const { language } = React.useContext(AppContext);
     const { theme } = React.useContext(WidgetContext);
@@ -12,7 +16,7 @@ const SwitchButton = () => {
 
     return (     
         <div>
-            <label className={`switch ${theme}`}>
+            <label className={`switch theme theme-${theme}`}>
                 {translate('off', language)}
                 <input type="checkbox" 
                        checked={ enabled } 

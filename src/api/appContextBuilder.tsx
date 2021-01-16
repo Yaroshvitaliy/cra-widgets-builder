@@ -4,9 +4,9 @@ import { AppContextProvider, IAppState, AppState, DefaultAppState } from '../con
 import { createChildren } from '../utils/index';
 
 /**
- * The Application API.
+ * The Application Context.
  */
-export interface AppApi {
+export interface AppContext {
   /**
    * The component to be rendered.
    */
@@ -54,9 +54,9 @@ interface IComponentProps {
 }
 
 /**
- * Helps to build the Application API.
+ * Helps to build the Application Context and manage its state.
  */
-export class AppBuilder {
+export class AppContextBuilder {
     private props: IComponentProps = {
       children: undefined,
       appState: DefaultAppState,
@@ -67,9 +67,9 @@ export class AppBuilder {
     };
 
     /**
-     * Builds the Application API.
+     * Builds the Application Context.
      * 
-     * @returns {AppApi} The Application API.
+     * @returns {AppContext} The Application Context.
      */
     build() {
       const Component = () => {
@@ -110,7 +110,7 @@ export class AppBuilder {
         setThemeState && setThemeState(theme);
       };
 
-      const api: AppApi = {
+      const context: AppContext = {
         Component,
         render,
         getLanguage,
@@ -119,11 +119,12 @@ export class AppBuilder {
         setTheme
       };
 
-      return api;
+      return context;
     }
 
     /**
      * Sets the children.
+     * All the children within the context will have the same state (language, theme).
      * 
      * @param {() => JSX.Element) | (Array<() => JSX.Element>)} children The children.
      */
@@ -175,4 +176,4 @@ export class AppBuilder {
     }
   }
 
-export default AppBuilder;
+export default AppContextBuilder;
