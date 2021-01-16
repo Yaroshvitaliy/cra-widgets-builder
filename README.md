@@ -14,17 +14,17 @@ The name of library is specified in package.json:
 ## Example of using Widgets Builder Library API
 #### index.html
 ```html
-<h3>App Builder</h3>
+<h3>App Context Builder</h3>
 <h5>Language Switcher</h5>
-<div id="app-language-switcher"></div>
+<div id="app-language-switcher-container"></div>
 <h5>Current Language</h5>
-<div id="app-current-language"></div>
+<div id="app-current-language-container"></div>
 <h5>Switch Button Widget 1</h5>
-<div id="app-switch-button-widget-1"></div>
+<div id="app-widget-container-1"></div>
 <h5>Switch Button Widget 2</h5>
-<div id="app-switch-button-widget-2"></div>
+<div id="app-widget-container-2"></div>
 <h5>Switch Button Widget 3</h5>
-<div id="app-switch-button-widget-3"></div>
+<div id="app-widget-container-3"></div>
 ```
 #### index.js
 ```javascript
@@ -53,19 +53,19 @@ const currentLanguageWidgetContext = new WidgetContextBuilder()
 // Build Widget Context 1
 const widgetContext1 = new WidgetContextBuilder()
     .withChildren(SwitchButton)
-    .withContainer(document.getElementById('app-widget-1-container'))
+    .withContainer(document.getElementById('app-widget-container-1'))
     .build();
 
 // Build Widget Context 2
 const widgetContext2 = new WidgetContextBuilder()
     .withChildren(SwitchButton)
-    .withContainer(document.getElementById('app-widget-2-container'))
+    .withContainer(document.getElementById('app-widget-container-2'))
     .build();
 
 // Build Widget Context 3
 const widgetContext3 = new WidgetContextBuilder()
     .withChildren(SwitchButton)
-    .withContainer(document.getElementById('app-widget-3-container'))
+    .withContainer(document.getElementById('app-widget-container-3'))
     .build();
 
 // Build Switch Button Context 1

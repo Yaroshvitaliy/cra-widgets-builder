@@ -72,11 +72,11 @@
       <h5>Current Language</h5>
       <div id="app-current-language-container"></div>
       <h5>Switch Button Widget 1</h5>
-      <div id="app-widget-1-container"></div>
+      <div id="app-widget-container-1"></div>
       <h5>Switch Button Widget 2</h5>
-      <div id="app-widget-2-container"></div>
+      <div id="app-widget-container-2"></div>
       <h5>Switch Button Widget 3</h5>
-      <div id="app-widget-3-container"></div>
+      <div id="app-widget-container-3"></div>
 
       <script>
         document.addEventListener('DOMContentLoaded', function(event) {
@@ -105,19 +105,19 @@
           // Build Widget Context 1
           const widgetContext1 = new WidgetContextBuilder()
             .withChildren(SwitchButton)
-            .withContainer(document.getElementById('app-widget-1-container'))
+            .withContainer(document.getElementById('app-widget-container-1'))
             .build();
 
           // Build Widget Context 2
           const widgetContext2 = new WidgetContextBuilder()
             .withChildren(SwitchButton)
-            .withContainer(document.getElementById('app-widget-2-container'))
+            .withContainer(document.getElementById('app-widget-container-2'))
             .build();
 
           // Build Widget Context 3
           const widgetContext3 = new WidgetContextBuilder()
             .withChildren(SwitchButton)
-            .withContainer(document.getElementById('app-widget-3-container'))
+            .withContainer(document.getElementById('app-widget-container-3'))
             .build();
 
           // Build Switch Button Context 1
