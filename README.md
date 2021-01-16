@@ -14,11 +14,17 @@ The name of library is specified in package.json:
 ## Example of using Widgets Builder Library API
 #### index.html
 ```html
+<h3>App Builder</h3>
+<h5>Language Switcher</h5>
 <div id="app-language-switcher"></div>
+<h5>Current Language</h5>
 <div id="app-current-language"></div>
-<div id="app-widget-1"></div>
-<div id="app-widget-2"></div>
-<div id="app-widget-3"></div>
+<h5>Switch Button Widget 1</h5>
+<div id="app-switch-button-widget-1"></div>
+<h5>Switch Button Widget 2</h5>
+<div id="app-switch-button-widget-2"></div>
+<h5>Switch Button Widget 3</h5>
+<div id="app-switch-button-widget-3"></div>
 ```
 #### index.js
 ```javascript
@@ -45,33 +51,31 @@ const widgetCurrentLanguage = new WidgetBuilder()
     .build();
 
 // Build Switch Button Widget 1
-const switchButton1 = new SwitchButtonBuilder()
-    .withChildren(SwitchButton)
-    .build();
-
 const widget1 = new WidgetBuilder()
-    .withChildren(switchButton1.Component)
-    .withContainer(document.getElementById('app-widget-1'))
+    .withChildren(SwitchButton)
+    .withContainer(document.getElementById('app-switch-button-widget-1'))
     .build();
 
 // Build Switch Button Widget 2
-const switchButton2 = new SwitchButtonBuilder()
-    .withChildren(SwitchButton)
-    .build();
-
 const widget2 = new WidgetBuilder()
-    .withChildren(switchButton2.Component)
-    .withContainer(document.getElementById('app-widget-2'))
+    .withChildren(SwitchButton)
+    .withContainer(document.getElementById('app-switch-button-widget-2'))
     .build();
 
 // Build Switch Button Widget 3
-const switchButton3 = new SwitchButtonBuilder()
-    .withChildren([SwitchButton, SwitchButton])
+const widget3 = new WidgetBuilder()
+    .withChildren(SwitchButton)
+    .withContainer(document.getElementById('app-switch-button-widget-3'))
     .build();
 
-const widget3 = new WidgetBuilder()
-    .withChildren([switchButton3.Component])
-    .withContainer(document.getElementById('app-widget-3'))
+// Build Switch Button 1
+const switchButton1 = new SwitchButtonBuilder()
+    .withChildren(widget1.Component)
+    .build();            
+
+// Build Switch Button 2
+const switchButton2 = new SwitchButtonBuilder()
+    .withChildren([widget2.Component, widget3.Component])
     .build();
 
 // Build App
@@ -88,9 +92,8 @@ const app = new AppBuilder()
     .withChildren([
         widgetLanguageSwitcher.Component,
         widgetCurrentLanguage.Component,
-        widget1.Component,
-        widget2.Component,
-        widget3.Component
+        switchButton1.Component,
+        switchButton2.Component
     ])
     .build();
 
@@ -100,11 +103,10 @@ app.render();
 // Test API
 Logger.debug(`Current language: '${app.getLanguage()}'`);
 Logger.debug(`Current theme: '${app.getTheme()}'`);
-Logger.debug(`Current state of switchButton3: ${switchButton3.getState() ? 'on' : 'off'}`);
+Logger.debug(`Current state of switchButton2: ${switchButton2.getState() ? 'on' : 'off'}`);
 
 Logger.debug(`Current theme of widget3: '${widget3.getTheme()}'`);
 
-switchButton2.toggleState();
 widget3.setTheme('blue');
 
 Logger.debug(`Current theme of widget3: '${widget3.getTheme()}'`);
@@ -112,11 +114,11 @@ Logger.debug(`Current theme of widget3: '${widget3.getTheme()}'`);
 setTimeout(() => {
     app.setLanguage('pt');
     app.setTheme('light');
-    switchButton3.setState(true);
+    switchButton2.toggleState();
 
     Logger.debug(`Current language: '${app.getLanguage()}'`);
     Logger.debug(`Current theme: '${app.getTheme()}'`);
-    Logger.debug(`Current state of switchButton3: ${switchButton3.getState() ? 'on': 'off'}`);
+    Logger.debug(`Current state of switchButton2: ${switchButton2.getState() ? 'on': 'off'}`);
 }, 3000);
 ```
 
