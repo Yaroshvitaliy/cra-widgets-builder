@@ -108,7 +108,6 @@ appContext.render();
 const testApi = () => {
     appContext.setLanguage('pt');
 
-    // Test API
     Logger.debug(`Current language: '${appContext.getLanguage()}'`);
     Logger.debug(`Current theme: '${appContext.getTheme()}'`);
     Logger.debug(`Current state of switchButton2: ${switchButtonContext2.getState() ? 'on' : 'off'}`);
@@ -123,7 +122,7 @@ const testApi = () => {
     Logger.debug(`Current theme: '${appContext.getTheme()}'`);
     Logger.debug(`Current state of switchButton2: ${switchButtonContext2.getState() ? 'on': 'off'}`);
     Logger.debug(`Current theme of widget3: '${widgetContext3.getTheme()}'`);
-}
+};
 
 document.getElementById('test-api-btn')
     .addEventListener('click', function() {
