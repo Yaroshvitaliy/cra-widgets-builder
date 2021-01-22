@@ -25,6 +25,7 @@ The name of library is specified in package.json:
 <div id="app-widget-container-2"></div>
 <h5>Switch Button Widget 3</h5>
 <div id="app-widget-container-3"></div>
+<button id="test-api-btn">Test api</button>
 ```
 #### index.js
 ```javascript
@@ -71,17 +72,21 @@ const widgetContext3 = new WidgetContextBuilder()
 // Build Switch Button Context 1
 const switchButtonContext1 = new SwitchButtonContextBuilder()
     .withChildren(widgetContext1.Component)
+    .withEnabledUrlParam('switch-enabled-1')
     .build();            
 
 // Build Switch Button Context 2
 const switchButtonContext2 = new SwitchButtonContextBuilder()
     .withChildren([widgetContext2.Component, widgetContext3.Component])
+    .withEnabledUrlParam('switch-enabled-2')
     .build();
 
 // Build App Context
 const appContext = new AppContextBuilder()
     .withLanguage('en')
+    .withLanguageUrlParam('app-lang')
     .withTheme('default')
+    .withThemeUrlParam('app-theme')
     .withLanguageSetEventHandler(language => 
         Logger.debug(`Language set event: '${language}'`)
     )
@@ -100,18 +105,16 @@ const appContext = new AppContextBuilder()
 // Render app
 appContext.render();
 
-// Test API
-Logger.debug(`Current language: '${appContext.getLanguage()}'`);
-Logger.debug(`Current theme: '${appContext.getTheme()}'`);
-Logger.debug(`Current state of switchButton2: ${switchButtonContext2.getState() ? 'on' : 'off'}`);
+const testApi = () => {
+    appContext.setLanguage('pt');
 
-Logger.debug(`Current theme of widget3: '${widgetContext3.getTheme()}'`);
+    // Test API
+    Logger.debug(`Current language: '${appContext.getLanguage()}'`);
+    Logger.debug(`Current theme: '${appContext.getTheme()}'`);
+    Logger.debug(`Current state of switchButton2: ${switchButtonContext2.getState() ? 'on' : 'off'}`);
+    Logger.debug(`Current theme of widget3: '${widgetContext3.getTheme()}'`);
 
-widgetContext3.setTheme('blue');
-
-Logger.debug(`Current theme of widget3: '${widgetContext3.getTheme()}'`);
-
-setTimeout(() => {
+    widgetContext3.setTheme('blue');
     appContext.setLanguage('pt');
     appContext.setTheme('light');
     switchButtonContext2.toggleState();
@@ -119,7 +122,13 @@ setTimeout(() => {
     Logger.debug(`Current language: '${appContext.getLanguage()}'`);
     Logger.debug(`Current theme: '${appContext.getTheme()}'`);
     Logger.debug(`Current state of switchButton2: ${switchButtonContext2.getState() ? 'on': 'off'}`);
-}, 3000);
+    Logger.debug(`Current theme of widget3: '${widgetContext3.getTheme()}'`);
+}
+
+document.getElementById('test-api-btn')
+    .addEventListener('click', function() {
+        testApi();
+    });
 ```
 
 ## Available Scripts
