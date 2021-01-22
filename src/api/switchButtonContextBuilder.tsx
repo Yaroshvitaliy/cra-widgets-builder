@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
- import { 
+import { Router, Route, useHistory } from 'react-router-dom';
+import { History, Location } from 'history';
+import { 
   SwitchButtonContextProvider, 
   ISwitchButtonState, 
   SwitchButtonState, 
   DefaultSwitchButtonState
 } from '../contexts/SwitchButtonContext';
 import { createChildren } from '../utils/index';
+import { getHistory, deserializePathname, serializePathName } from '../services/locationService';
 
 /**
  * The Switch Button Context.
@@ -42,9 +45,10 @@ export interface SwitchButtonContext {
 
 interface IComponentProps {
   children: React.ReactNode;
-  switchButtonState: ISwitchButtonState,
+  switchButtonState: ISwitchButtonState;
   enabled?: boolean;
-  enabledSetEvent?: (enabled: boolean) => void;
+  enabledUrlParam?: string;
+  enabledSetEventHandler?: (enabled: boolean) => void;
 }
 
 /**
@@ -55,7 +59,7 @@ export class SwitchButtonContextBuilder {
       children: () => [],
       switchButtonState: DefaultSwitchButtonState,
       enabled: undefined,
-      enabledSetEvent: undefined
+      enabledSetEventHandler: undefined
     };
 
     /**
@@ -64,15 +68,50 @@ export class SwitchButtonContextBuilder {
      * @returns {SwitchButtonContext} The Switch Button Context.
      */
     build() {
-      const Component = () => {
-        this.props.switchButtonState = SwitchButtonState({ enabled: this.props.enabled });
+      const { enabled: initialEnabled, enabledUrlParam } = this.props;
+
+      const syncStateWithLocation = (switchButtonState: ISwitchButtonState, location: Location<any>) => {
+        const { setEnabledState } = switchButtonState;
+        const pathname = enabledUrlParam ? deserializePathname(location.pathname) : {};
+        const enabled = enabledUrlParam && pathname[enabledUrlParam] && (decodeURIComponent(pathname[enabledUrlParam]) === 'true');
+
+        enabled && setEnabledState && setEnabledState(enabled);
+      };
+
+      const syncHistoryWithState = (switchButtonState: ISwitchButtonState, history: History<any>) => {
+        const { enabledState } = switchButtonState;
+        const pathname = deserializePathname(history.location.pathname);
+
+        enabledUrlParam && (pathname[enabledUrlParam] = encodeURIComponent(enabledState));
+
+        const serializedPathname = serializePathName(pathname);
+        history.replace({ pathname:  serializedPathname});     
+      };
+
+      const RouteComponent = () => {
+        const switchButtonState = SwitchButtonState({ enabled: initialEnabled });
         const { children, enabled, ...rest } = this.props;
+        const history = useHistory(); 
+
+        React.useEffect(() => syncStateWithLocation(switchButtonState, history.location), []);
+        React.useEffect(() => syncHistoryWithState(switchButtonState, history), [switchButtonState, history]);
+
+        this.props.switchButtonState = switchButtonState;
+        
         return (
-          <SwitchButtonContextProvider {...rest}>
+          <SwitchButtonContextProvider {...rest} switchButtonState={switchButtonState}>
             {children}
           </SwitchButtonContextProvider>
         );
       };
+
+      const Component = () => (
+        <Router history={getHistory()}>
+          <Route>
+            <RouteComponent />
+          </Route>         
+        </Router>
+      );
 
       const render = (container: Element | DocumentFragment | null) =>
         ReactDOM.render(
@@ -132,12 +171,22 @@ export class SwitchButtonContextBuilder {
     }
 
     /**
+     * Sets the enabled URL param to be synchronized with the enabled state.
+     * 
+     * @param {string} enabledUrlParam The enabled URL param.
+     */
+    withEnabledUrlParam(enabledUrlParam: string) {
+      this.props.enabledUrlParam = enabledUrlParam;
+      return this;
+    }
+
+    /**
      * Sets the enabled set event handler.
      * 
-     * @param {(enabled: boolean) => void} enabledSetEvent The enabled set event.
+     * @param {(enabled: boolean) => void} enabledSetEvent The enabled set event handler.
      */
-    withEnabledSetEventHandler(enabledSetEvent: (enabled: boolean) => void) {
-      this.props.enabledSetEvent = enabledSetEvent;
+    withEnabledSetEventHandler(enabledSetEventHandler: (enabled: boolean) => void) {
+      this.props.enabledSetEventHandler = enabledSetEventHandler;
       return this;
     }
   }

@@ -33,9 +33,9 @@ export interface WidgetContext {
 
 interface IComponentProps {
   children: React.ReactNode;
-  widgetState: IWidgetState,
+  widgetState: IWidgetState;
   theme?: string;
-  themeSetEvent?: (theme: string) => void;
+  themeSetEventHandler?: (theme: string) => void;
   container?: Element | null;
 }
 
@@ -47,7 +47,7 @@ export class WidgetContextBuilder {
       children: () => [],
       widgetState: DefaultWidgetState,
       theme: undefined,
-      themeSetEvent: undefined,
+      themeSetEventHandler: undefined,
       container: undefined
     };
 
@@ -123,10 +123,10 @@ export class WidgetContextBuilder {
     /**
      * Sets the theme set event handler.
      * 
-     * @param {(theme: string) => void} themeSetEvent The theme set event.
+     * @param {(theme: string) => void} themeSetEventHandler The theme set event handler.
      */
-    withThemeSetEventHandler(themeSetEvent: (theme: string) => void) {
-      this.props.themeSetEvent = themeSetEvent;
+    withThemeSetEventHandler(themeSetEventHandler: (theme: string) => void) {
+      this.props.themeSetEventHandler = themeSetEventHandler;
       return this;
     }
 

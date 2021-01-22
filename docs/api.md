@@ -18,43 +18,49 @@
         -   [Parameters][14]
     -   [withLanguage][15]
         -   [Parameters][16]
-    -   [withLanguageSetEventHandler][17]
+    -   [withLanguageUrlParam][17]
         -   [Parameters][18]
-    -   [withTheme][19]
+    -   [withLanguageSetEventHandler][19]
         -   [Parameters][20]
-    -   [withThemeSetEventHandler][21]
+    -   [withTheme][21]
         -   [Parameters][22]
--   [SwitchButtonContext][23]
-    -   [Component][24]
-    -   [render][25]
+    -   [withThemeUrlParam][23]
+        -   [Parameters][24]
+    -   [withThemeSetEventHandler][25]
         -   [Parameters][26]
-    -   [getState][27]
-    -   [setState][28]
-    -   [toggleState][29]
--   [SwitchButtonContextBuilder][30]
-    -   [build][31]
-    -   [withChildren][32]
-        -   [Parameters][33]
-    -   [withEnabled][34]
-        -   [Parameters][35]
-    -   [withEnabledSetEventHandler][36]
+-   [SwitchButtonContext][27]
+    -   [Component][28]
+    -   [render][29]
+        -   [Parameters][30]
+    -   [getState][31]
+    -   [setState][32]
+    -   [toggleState][33]
+-   [SwitchButtonContextBuilder][34]
+    -   [build][35]
+    -   [withChildren][36]
         -   [Parameters][37]
--   [WidgetContext][38]
-    -   [Component][39]
-    -   [render][40]
+    -   [withEnabled][38]
+        -   [Parameters][39]
+    -   [withEnabledUrlParam][40]
         -   [Parameters][41]
-    -   [getTheme][42]
-    -   [setTheme][43]
--   [WidgetContextBuilder][44]
-    -   [build][45]
-    -   [withChildren][46]
+    -   [withEnabledSetEventHandler][42]
+        -   [Parameters][43]
+-   [WidgetContext][44]
+    -   [Component][45]
+    -   [render][46]
         -   [Parameters][47]
-    -   [withTheme][48]
-        -   [Parameters][49]
-    -   [withThemeSetEventHandler][50]
-        -   [Parameters][51]
-    -   [withContainer][52]
+    -   [getTheme][48]
+    -   [setTheme][49]
+-   [WidgetContextBuilder][50]
+    -   [build][51]
+    -   [withChildren][52]
         -   [Parameters][53]
+    -   [withTheme][54]
+        -   [Parameters][55]
+    -   [withThemeSetEventHandler][56]
+        -   [Parameters][57]
+    -   [withContainer][58]
+        -   [Parameters][59]
 
 ## AppContext
 
@@ -70,43 +76,43 @@ Type: function (): JSX.Element
 
 Renderes the component.
 
-Type: function (container: ([Element][54] \| [DocumentFragment][55] | null)): void
+Type: function (container: ([Element][60] \| [DocumentFragment][61] | null)): void
 
 #### Parameters
 
--   `container` **([Element][54] \| [DocumentFragment][55] | null)** The container. Optional parameter.
+-   `container` **([Element][60] \| [DocumentFragment][61] | null)** The container. Optional parameter.
 
 ### getLanguage
 
 Gets the language.
 
-Type: function (): [string][56]
+Type: function (): [string][62]
 
 ### setLanguage
 
 Sets the language.
 
-Type: function (language: [string][56]): void
+Type: function (language: [string][62]): void
 
 #### Parameters
 
--   `language` **[string][56]** The language.
+-   `language` **[string][62]** The language.
 
 ### getTheme
 
 Gets the theme.
 
-Type: function (): [string][56]
+Type: function (): [string][62]
 
 ### setTheme
 
 Sets the theme.
 
-Type: function (theme: [string][56]): void
+Type: function (theme: [string][62]): void
 
 #### Parameters
 
--   `theme` **[string][56]** The theme.
+-   `theme` **[string][62]** The theme.
 
 ## AppContextBuilder
 
@@ -116,7 +122,7 @@ Helps to build the Application Context and manage its state.
 
 Builds the Application Context.
 
-Returns **[AppContext][57]** The Application Context.
+Returns **[AppContext][63]** The Application Context.
 
 ### withChildren
 
@@ -125,7 +131,7 @@ All the children within the context will have the same state (language, theme).
 
 #### Parameters
 
--   `children` **(function (): JSX.Element | [Array][58]&lt;function (): JSX.Element>)** 
+-   `children` **(function (): JSX.Element | [Array][64]&lt;function (): JSX.Element>)** 
 
 ### withLanguage
 
@@ -134,15 +140,23 @@ Default value: 'en'.
 
 #### Parameters
 
--   `language` **[string][56]** The language.
+-   `language` **[string][62]** The language.
 
-### withLanguageSetEventHandler
+### withLanguageUrlParam
 
-Sets the language set hander.
+Sets the language URL param to be synchronized with the language state.
 
 #### Parameters
 
--   `languageSetEvent` **function (language: [string][56]): void** 
+-   `languageUrlParam` **[string][62]** The language URL param.
+
+### withLanguageSetEventHandler
+
+Sets the language set event hander.
+
+#### Parameters
+
+-   `languageSetEventHandler` **function (language: [string][62]): void** 
 
 ### withTheme
 
@@ -151,7 +165,15 @@ Default value: 'default'.
 
 #### Parameters
 
--   `theme` **[string][56]** The theme.
+-   `theme` **[string][62]** The theme.
+
+### withThemeUrlParam
+
+Sets the theme URL param to be synchronized with the theme state.
+
+#### Parameters
+
+-   `themeUrlParam` **[string][62]** The theme URL param.
 
 ### withThemeSetEventHandler
 
@@ -159,7 +181,7 @@ Sets the theme set event handler.
 
 #### Parameters
 
--   `themeSetEvent` **function (theme: [string][56]): void** 
+-   `themeSetEventHandler` **function (theme: [string][62]): void** 
 
 ## SwitchButtonContext
 
@@ -175,23 +197,23 @@ Type: function (): JSX.Element
 
 Renderes the component.
 
-Type: function (container: ([Element][54] \| [DocumentFragment][55] | null)): void
+Type: function (container: ([Element][60] \| [DocumentFragment][61] | null)): void
 
 #### Parameters
 
--   `container` **([Element][54] \| [DocumentFragment][55] | null)** The container. Optional parameter.
+-   `container` **([Element][60] \| [DocumentFragment][61] | null)** The container. Optional parameter.
 
 ### getState
 
 Gets the state of the switch button.
 
-Type: function (): [boolean][59]
+Type: function (): [boolean][65]
 
 ### setState
 
 Sets the state of the switch button.
 
-Type: function (state: [boolean][59]): void
+Type: function (state: [boolean][65]): void
 
 ### toggleState
 
@@ -207,7 +229,7 @@ Helps to build the Switch Button Context and manage its state.
 
 Builds the Switch Button Context.
 
-Returns **[SwitchButtonContext][60]** The Switch Button Context.
+Returns **[SwitchButtonContext][66]** The Switch Button Context.
 
 ### withChildren
 
@@ -216,7 +238,7 @@ All the children within the context will have the same state.
 
 #### Parameters
 
--   `children` **(function (): JSX.Element | [Array][58]&lt;function (): JSX.Element>)** 
+-   `children` **(function (): JSX.Element | [Array][64]&lt;function (): JSX.Element>)** 
 
 ### withEnabled
 
@@ -226,7 +248,15 @@ Default value: false ('off').
 
 #### Parameters
 
--   `enabled` **[boolean][59]** The state of the Switch Button.
+-   `enabled` **[boolean][65]** The state of the Switch Button.
+
+### withEnabledUrlParam
+
+Sets the enabled URL param to be synchronized with the enabled state.
+
+#### Parameters
+
+-   `enabledUrlParam` **[string][62]** The enabled URL param.
 
 ### withEnabledSetEventHandler
 
@@ -234,7 +264,7 @@ Sets the enabled set event handler.
 
 #### Parameters
 
--   `enabledSetEvent` **function (enabled: [boolean][59]): void** 
+-   `enabledSetEventHandler` **function (enabled: [boolean][65]): void** 
 
 ## WidgetContext
 
@@ -250,23 +280,23 @@ Type: function (): JSX.Element
 
 Renderes the component.
 
-Type: function (container: ([Element][54] \| [DocumentFragment][55] | null)): void
+Type: function (container: ([Element][60] \| [DocumentFragment][61] | null)): void
 
 #### Parameters
 
--   `container` **([Element][54] \| [DocumentFragment][55] | null)** The container. Optional parameter.
+-   `container` **([Element][60] \| [DocumentFragment][61] | null)** The container. Optional parameter.
 
 ### getTheme
 
 Gets the theme.
 
-Type: function (): [string][56]
+Type: function (): [string][62]
 
 ### setTheme
 
 Sets the theme.
 
-Type: function (theme: [string][56]): void
+Type: function (theme: [string][62]): void
 
 ## WidgetContextBuilder
 
@@ -276,7 +306,7 @@ Helps to build the widget Contex and manage its state.
 
 Builds the Widget Context.
 
-Returns **[WidgetContext][61]** The Widget Context.
+Returns **[WidgetContext][67]** The Widget Context.
 
 ### withChildren
 
@@ -285,7 +315,7 @@ All the children within the context will have the same state (container, theme).
 
 #### Parameters
 
--   `children` **(function (): JSX.Element | [Array][58]&lt;function (): JSX.Element>)** 
+-   `children` **(function (): JSX.Element | [Array][64]&lt;function (): JSX.Element>)** 
 
 ### withTheme
 
@@ -294,7 +324,7 @@ Default value: 'default'.
 
 #### Parameters
 
--   `theme` **[string][56]** The theme.
+-   `theme` **[string][62]** The theme.
 
 ### withThemeSetEventHandler
 
@@ -302,7 +332,7 @@ Sets the theme set event handler.
 
 #### Parameters
 
--   `themeSetEvent` **function (theme: [string][56]): void** 
+-   `themeSetEventHandler` **function (theme: [string][62]): void** 
 
 ### withContainer
 
@@ -310,7 +340,7 @@ Sets the container the widget will be rendered in.
 
 #### Parameters
 
--   `container` **[string][56]** The container.
+-   `container` **[string][62]** The container.
 
 [1]: #appcontext
 
@@ -344,92 +374,104 @@ Sets the container the widget will be rendered in.
 
 [16]: #parameters-4
 
-[17]: #withlanguageseteventhandler
+[17]: #withlanguageurlparam
 
 [18]: #parameters-5
 
-[19]: #withtheme
+[19]: #withlanguageseteventhandler
 
 [20]: #parameters-6
 
-[21]: #withthemeseteventhandler
+[21]: #withtheme
 
 [22]: #parameters-7
 
-[23]: #switchbuttoncontext
+[23]: #withthemeurlparam
 
-[24]: #component-1
+[24]: #parameters-8
 
-[25]: #render-1
+[25]: #withthemeseteventhandler
 
-[26]: #parameters-8
+[26]: #parameters-9
 
-[27]: #getstate
+[27]: #switchbuttoncontext
 
-[28]: #setstate
+[28]: #component-1
 
-[29]: #togglestate
+[29]: #render-1
 
-[30]: #switchbuttoncontextbuilder
+[30]: #parameters-10
 
-[31]: #build-1
+[31]: #getstate
 
-[32]: #withchildren-1
+[32]: #setstate
 
-[33]: #parameters-9
+[33]: #togglestate
 
-[34]: #withenabled
+[34]: #switchbuttoncontextbuilder
 
-[35]: #parameters-10
+[35]: #build-1
 
-[36]: #withenabledseteventhandler
+[36]: #withchildren-1
 
 [37]: #parameters-11
 
-[38]: #widgetcontext
+[38]: #withenabled
 
-[39]: #component-2
+[39]: #parameters-12
 
-[40]: #render-2
+[40]: #withenabledurlparam
 
-[41]: #parameters-12
+[41]: #parameters-13
 
-[42]: #gettheme-1
+[42]: #withenabledseteventhandler
 
-[43]: #settheme-1
+[43]: #parameters-14
 
-[44]: #widgetcontextbuilder
+[44]: #widgetcontext
 
-[45]: #build-2
+[45]: #component-2
 
-[46]: #withchildren-2
+[46]: #render-2
 
-[47]: #parameters-13
+[47]: #parameters-15
 
-[48]: #withtheme-1
+[48]: #gettheme-1
 
-[49]: #parameters-14
+[49]: #settheme-1
 
-[50]: #withthemeseteventhandler-1
+[50]: #widgetcontextbuilder
 
-[51]: #parameters-15
+[51]: #build-2
 
-[52]: #withcontainer
+[52]: #withchildren-2
 
 [53]: #parameters-16
 
-[54]: https://developer.mozilla.org/docs/Web/API/Element
+[54]: #withtheme-1
 
-[55]: https://developer.mozilla.org/docs/Web/API/DocumentFragment
+[55]: #parameters-17
 
-[56]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[56]: #withthemeseteventhandler-1
 
-[57]: #appcontext
+[57]: #parameters-18
 
-[58]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[58]: #withcontainer
 
-[59]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[59]: #parameters-19
 
-[60]: #switchbuttoncontext
+[60]: https://developer.mozilla.org/docs/Web/API/Element
 
-[61]: #widgetcontext
+[61]: https://developer.mozilla.org/docs/Web/API/DocumentFragment
+
+[62]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[63]: #appcontext
+
+[64]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[65]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[66]: #switchbuttoncontext
+
+[67]: #widgetcontext

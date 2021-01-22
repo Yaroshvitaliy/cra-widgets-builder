@@ -13,7 +13,7 @@ interface IWidgetContextProviderProps {
   children: React.ReactNode;
   widgetState: IWidgetState;
   theme?: string;
-  themeSetEvent?: (theme: string) => void;
+  themeSetEventHandler?: (theme: string) => void;
 }
 
 export interface IWidgetContextValue {
@@ -49,14 +49,14 @@ export const WidgetContext = React.createContext<IWidgetContextValue>(DefaultWid
 export const WidgetContextProvider = ({ 
     children,
     widgetState,
-    themeSetEvent 
+    themeSetEventHandler 
   }: IWidgetContextProviderProps) => {
 
     const { themeState, setThemeState } = widgetState;
 
     React.useEffect(() => {
-      themeSetEvent && themeSetEvent(themeState);
-    }, [ themeState, setThemeState, themeSetEvent ])
+      themeSetEventHandler && themeSetEventHandler(themeState);
+    }, [ themeState, setThemeState, themeSetEventHandler ])
 
     const contextValue: IWidgetContextValue = {
       theme: themeState,

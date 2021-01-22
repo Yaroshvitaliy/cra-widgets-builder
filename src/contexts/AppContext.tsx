@@ -15,8 +15,8 @@ export interface IAppState {
 export interface IAppContextProviderProps {
   children: React.ReactNode;
   appState: IAppState,
-  languageSetEvent?: (language: string) => void;
-  themeSetEvent?: (theme: string) => void;
+  languageSetEventHandler?: (language: string) => void;
+  themeSetEventHandler?: (theme: string) => void;
 }
 
 export interface IAppContextValue {
@@ -62,19 +62,19 @@ export const AppContext = React.createContext<IAppContextValue>(DefaultAppContex
 export const AppContextProvider = ({ 
     children, 
     appState,
-    languageSetEvent,
-    themeSetEvent
+    languageSetEventHandler,
+    themeSetEventHandler
   }: IAppContextProviderProps) => {
     
     const { languageState, setLanguageState, themeState, setThemeState } = appState || {};
 
     React.useEffect(() => {
-      languageSetEvent && languageSetEvent(languageState);
-    }, [ languageState, setLanguageState, languageSetEvent ]);
+      languageSetEventHandler && languageSetEventHandler(languageState);
+    }, [ languageState, setLanguageState, languageSetEventHandler ]);
     
     React.useEffect(() => {
-      themeSetEvent && themeSetEvent(themeState);
-    }, [ themeState, setThemeState, themeSetEvent ]);
+      themeSetEventHandler && themeSetEventHandler(themeState);
+    }, [ themeState, setThemeState, themeSetEventHandler ]);
 
     const contextValue: IAppContextValue = {
       language: languageState,
