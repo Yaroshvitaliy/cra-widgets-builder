@@ -1,12 +1,49 @@
-const { library } = require('./package.json');
+const { library, version } = require('./package.json');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = function(config, env) {
-  // const isEnvDevelopment = env === 'development';
-  //const isEnvProduction = env === 'production';
+const fileName = `${library}-${version}`;
 
-  config.output.library = library;
-  config.output.libraryTarget = 'umd';
-  config.output.libraryExport = 'default';
+const createPluginsFilter = pluginsToRemove => plugin => !pluginsToRemove.includes(plugin.constructor.name);
 
-  return config;
+const rewire = config => {
+    config.output = {
+        ...config.output,
+        library,
+        libraryTarget: 'umd',
+        libraryExport: 'default'
+    };
+
+    config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+            cacheGroups: {
+                default: false
+            }
+        },
+        runtimeChunk: false
+    };
+
+    return config;
+};
+
+const rewireForProductionEnv = config => {
+    config.output = {
+        ...config.output,
+        filename: `static/js/${fileName}.js`,
+    };
+
+    config.plugins = config.plugins.filter(createPluginsFilter(['MiniCssExtractPlugin']));
+
+    config.plugins.push(new MiniCssExtractPlugin({
+        filename: `static/css/${fileName}.css`,
+        chunkFilename: 'static/css/[name].chunk.css'
+    }));
+
+    return config;
+};
+
+module.exports = (config, env) => {
+    rewire(config);
+    (env === 'production') && rewireForProductionEnv(config);
+    return config;
 };
