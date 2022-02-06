@@ -1,5 +1,5 @@
 # Getting Started with Widgets Builder Library
-Widgets Builder Library is an example of a project that shows how to build widgets that behave like a single application all together and embed them into any place in html document.\
+Widgets Builder Library is an example of a project that shows how to build widgets that behave like a single application and embed them into any place in html document.\
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
 [react-app-rewired](https://www.npmjs.com/package/react-app-rewired) package was installed to set up Webpack (in config-overrides.js).
 Before running an example, you have to build the project (see instructions bellow).\
@@ -130,6 +130,9 @@ document.getElementById('test-api-btn')
         testApi();
     });
 ```
+
+## Screenshots of the example
+![ContextBuilders](https://raw.githubusercontent.com/Yaroshvitaliy/cra-widgets-builder/main/assets/img/ContextBuilders.jpg)
 
 ## Available Scripts
 
