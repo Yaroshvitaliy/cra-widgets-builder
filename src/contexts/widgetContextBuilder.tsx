@@ -102,7 +102,7 @@ export class WidgetContextBuilder {
      * Sets the children.
      * All the children within the context will have the same state (container, theme).
      * 
-     * @param {() => JSX.Element) | (Array<() => JSX.Element>)} children The children.
+     * @param {(() => JSX.Element) | (Array<() => JSX.Element>)} children The children.
      */
     withChildren(children: (() => JSX.Element) | (Array<() => JSX.Element>)) {
       this.props.children = createChildren(children);

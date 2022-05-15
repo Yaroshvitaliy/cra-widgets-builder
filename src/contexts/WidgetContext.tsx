@@ -61,10 +61,11 @@ export const WidgetContextProvider = ({
     const contextValue: IWidgetContextValue = {
       theme: themeState,
       setTheme: (theme: string) => setThemeState && setThemeState(theme)
-    }
+    };
 
     return (
       <WidgetContext.Provider value={contextValue}>
         {children}
       </WidgetContext.Provider>
-  )};
+    );
+  };

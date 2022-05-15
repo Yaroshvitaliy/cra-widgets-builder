@@ -14,7 +14,7 @@ export interface IAppState {
 
 export interface IAppContextProviderProps {
   children: React.ReactNode;
-  appState: IAppState,
+  appState: IAppState;
   languageSetEventHandler?: (language: string) => void;
   themeSetEventHandler?: (theme: string) => void;
 }
@@ -81,10 +81,11 @@ export const AppContextProvider = ({
       theme: themeState,
       setLanguage: (language: string) => setLanguageState && setLanguageState(language),
       setTheme: (theme: string) => setThemeState && setThemeState(theme)
-    }
+    };
 
     return (
       <AppContext.Provider value={contextValue}>
         {children}
       </AppContext.Provider>
-  )};
+    );
+};

@@ -11,7 +11,7 @@ export interface ISwitchButtonState {
 
 interface ISwitchButtonContextProviderProps {
   children: React.ReactNode;
-  switchButtonState: ISwitchButtonState,
+  switchButtonState: ISwitchButtonState;
   enabledSetEventHandler?: (enabled: boolean) => void;
 }
 
@@ -59,10 +59,11 @@ export const SwitchButtonContextProvider = ({
     const contextValue: ISwitchButtonContextValue = {
       enabled: enabledState,
       setEnabled: (enabled: boolean) => setEnabledState && setEnabledState(enabled)
-    }
+    };
 
     return (
         <SwitchButtonContext.Provider value={contextValue}>
           {children}
         </SwitchButtonContext.Provider>
-    )};
+    );
+};

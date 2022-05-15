@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, useHistory } from 'react-router-dom';
 import { History, Location } from 'history';
-import { AppContextProvider, IAppState, AppState, DefaultAppState } from '../contexts/AppContext';
+import { AppContextProvider, IAppState, AppState, DefaultAppState } from './AppContext';
 import { createChildren } from '../utils/index';
 import { getHistory, deserializePathname, serializePathName } from '../services/locationService';
 
@@ -171,7 +171,7 @@ export class AppContextBuilder {
      * Sets the children.
      * All the children within the context will have the same state (language, theme).
      * 
-     * @param {() => JSX.Element) | (Array<() => JSX.Element>)} children The children.
+     * @param {(() => JSX.Element) | (Array<() => JSX.Element>)} children The children.
      */
     withChildren(children: (() => JSX.Element) | (Array<() => JSX.Element>)) {
       this.props.children = createChildren(children);
