@@ -1,69 +1,103 @@
 import React from 'react';
 
+/**
+ * The SwitchButton state props interface.
+ */
 export interface ISwitchButtonStateProps {
-  enabled?: boolean;
+    enabled?: boolean;
 }
 
+/**
+ * The SwitchButton state interface.
+ */
 export interface ISwitchButtonState {
-  enabledState: boolean;
-  setEnabledState: undefined | React.Dispatch<React.SetStateAction<boolean>>;
+    enabledState: boolean;
+    setEnabledState: undefined | React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-interface ISwitchButtonContextProviderProps {
-  children: React.ReactNode;
-  switchButtonState: ISwitchButtonState;
-  enabledSetEventHandler?: (enabled: boolean) => void;
+/**
+ * The SwitchButton context provider props interface.
+ */
+export interface ISwitchButtonContextProviderProps {
+    children: React.ReactNode;
+    switchButtonState: ISwitchButtonState;
+    enabledSetEventHandler?: (enabled: boolean) => void;
 }
 
+/**
+ * The SwitchButton context value interface.
+ */
 export interface ISwitchButtonContextValue {
-  enabled: boolean;
-  setEnabled: (enabled: boolean) => void;
+    enabled: boolean;
+    setEnabled: (enabled: boolean) => void;
 }
 
-export const DefaulEnabled = false;
+export const DefaultEnabled = false;
 
+/**
+ * The default SwitchButton state.
+ */
 export const DefaultSwitchButtonState: ISwitchButtonState = {
-  enabledState: DefaulEnabled,
-  setEnabledState: undefined
+    enabledState: DefaultEnabled,
+    setEnabledState: undefined,
 };
 
-const DefaultSwitchButtonContextValue: ISwitchButtonContextValue = {
-  enabled: DefaulEnabled,
-  setEnabled: (enabled: boolean) => {}
+/**
+ * The default SwitchButton context value.
+ */
+export const DefaultSwitchButtonContextValue: ISwitchButtonContextValue = {
+    enabled: DefaultEnabled,
+    setEnabled: (enabled: boolean) => {},
 };
 
-export const SwitchButtonState = ({ enabled }: ISwitchButtonStateProps) => {
-    const [ enabledState, setEnabledState ] = React.useState<boolean>(DefaulEnabled);
-    
+/**
+ * The SwitchButton state.
+ */
+export const SwitchButtonState = ({
+            enabled,
+        }: ISwitchButtonStateProps) => {
+
+    const [ enabledState, setEnabledState ] = React.useState<boolean>(enabled || DefaultEnabled);
+
     const switchButtonState: ISwitchButtonState = {
-      enabledState,
-      setEnabledState
+        enabledState,
+        setEnabledState,
     };
 
     return switchButtonState;
-  };
+};
 
+/**
+ * The SwitchButton context.
+ */
 export const SwitchButtonContext = React.createContext<ISwitchButtonContextValue>(DefaultSwitchButtonContextValue);
 
-export const SwitchButtonContextProvider = ({ 
-    children,
-    switchButtonState, 
-    enabledSetEventHandler 
-  }: ISwitchButtonContextProviderProps) => {
-    const { enabledState, setEnabledState } = switchButtonState;
-    
+/**
+ * The SwitchButton context provider.
+ */
+export const SwitchButtonContextProvider = ({
+            children,
+            switchButtonState,
+            enabledSetEventHandler,
+        }: ISwitchButtonContextProviderProps) => {
+
+    const {
+        enabledState,
+        setEnabledState,
+    } = switchButtonState || {};
+
     React.useEffect(() => {
-      enabledSetEventHandler && enabledSetEventHandler(enabledState);      
-    }, [ enabledState, setEnabledState, enabledSetEventHandler ])
+        enabledSetEventHandler && enabledSetEventHandler(enabledState);
+    }, [ enabledState, setEnabledState, enabledSetEventHandler ]);
 
     const contextValue: ISwitchButtonContextValue = {
-      enabled: enabledState,
-      setEnabled: (enabled: boolean) => setEnabledState && setEnabledState(enabled)
+        enabled: enabledState,
+        setEnabled: (enabled: boolean) => setEnabledState && setEnabledState(enabled),
     };
 
     return (
         <SwitchButtonContext.Provider value={contextValue}>
-          {children}
+            {children}
         </SwitchButtonContext.Provider>
     );
 };

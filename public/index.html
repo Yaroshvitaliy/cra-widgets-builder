@@ -181,17 +181,17 @@
 
             Logger.debug(`Current language: '${appContext.getLanguage()}'`);
             Logger.debug(`Current theme: '${appContext.getTheme()}'`);
-            Logger.debug(`Current state of switchButton2: ${switchButtonContext2.getState() ? 'on' : 'off'}`);
+            Logger.debug(`Current state of switchButton2: ${switchButtonContext2.getEnabled() ? 'on' : 'off'}`);
             Logger.debug(`Current theme of widget3: '${widgetContext3.getTheme()}'`);
 
             widgetContext3.setTheme('blue');
             appContext.setLanguage('pt');
             appContext.setTheme('light');
-            switchButtonContext2.toggleState();
+            switchButtonContext2.setEnabled(!switchButtonContext2.getEnabled());
 
             Logger.debug(`Current language: '${appContext.getLanguage()}'`);
             Logger.debug(`Current theme: '${appContext.getTheme()}'`);
-            Logger.debug(`Current state of switchButton2: ${switchButtonContext2.getState() ? 'on': 'off'}`);
+            Logger.debug(`Current state of switchButton2: ${switchButtonContext2.getEnabled() ? 'on': 'off'}`);
             Logger.debug(`Current theme of widget3: '${widgetContext3.getTheme()}'`);
           };
 
