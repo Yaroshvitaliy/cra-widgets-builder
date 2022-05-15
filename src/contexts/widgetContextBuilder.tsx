@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { WidgetContextProvider, IWidgetState, WidgetState, DefaultWidgetState } from '../contexts/WidgetContext';
+import { WidgetContextProvider, IWidgetState, WidgetState, DefaultWidgetState } from './widgetContext';
 import Widget from '../components/Widget';
 import { createChildren } from '../utils/index';
 

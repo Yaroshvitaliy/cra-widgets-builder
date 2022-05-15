@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { AppContext } from '../contexts/AppContext';
-import { WidgetContext } from '../contexts/WidgetContext';
-import { SwitchButtonContext } from '../contexts/SwitchButtonContext';
+import { AppContext } from '../contexts/appContext';
+import { WidgetContext } from '../contexts/widgetContext';
+import { SwitchButtonContext } from '../contexts/switchButtonContext';
 import translate from '../services/translationService';
 import './SwitchButton.scss';
 

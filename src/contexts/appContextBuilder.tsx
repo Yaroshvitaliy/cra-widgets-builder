@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, useHistory } from 'react-router-dom';
 import { History, Location } from 'history';
-import { AppContextProvider, IAppState, AppState, DefaultAppState } from './AppContext';
+import { AppContextProvider, IAppState, AppState, DefaultAppState } from './appContext';
 import { createChildren } from '../utils/index';
 import { getHistory, deserializePathname, serializePathName } from '../services/locationService';
 

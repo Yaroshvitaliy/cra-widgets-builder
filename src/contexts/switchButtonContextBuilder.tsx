@@ -7,7 +7,7 @@ import {
   ISwitchButtonState, 
   SwitchButtonState, 
   DefaultSwitchButtonState
-} from '../contexts/SwitchButtonContext';
+} from './switchButtonContext';
 import { createChildren } from '../utils/index';
 import { getHistory, deserializePathname, serializePathName } from '../services/locationService';
 
