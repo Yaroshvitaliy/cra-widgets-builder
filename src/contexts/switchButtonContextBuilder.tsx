@@ -69,7 +69,7 @@ export class SwitchButtonContextBuilder {
                 setEnabledState,
             } = switchButtonState;
             const pathname = deserializePathname(location.pathname);
-            const enabled = enabledUrlParam && pathname[enabledUrlParam] && (decodeURIComponent(pathname[enabledUrlParam]) === 'true');
+            const enabled = enabledUrlParam && pathname[enabledUrlParam] && JSON.parse(decodeURIComponent(pathname[enabledUrlParam]));
             enabled && setEnabledState && setEnabledState(enabled);
         };
 
