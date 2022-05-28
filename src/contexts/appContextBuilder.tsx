@@ -125,7 +125,7 @@ export class AppContextBuilder {
             this.props.appState = appState;
             return (
                 <AppContextProvider {...rest} appState={appState}>
-                    { children }
+                    {children}
                 </AppContextProvider>
             );
         };

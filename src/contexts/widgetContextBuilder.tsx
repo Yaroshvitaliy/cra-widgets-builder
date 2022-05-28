@@ -95,7 +95,7 @@ export class WidgetContextBuilder {
                 children,
                 theme,
                 themeUrlParam,
-                container,  
+                container,
                 ...rest
             } = this.props;
             React.useEffect(() => syncStateWithLocation(widgetState, history.location), []);
@@ -188,9 +188,9 @@ export class WidgetContextBuilder {
     }
 
     /**
-     * Sets the container the widget will be rendered in.
-     * 
-     * @param {string} container The container.
+     * Sets the container. Default value: undefined.
+     *
+     * @param {Element | null} container The container.
      */
     withContainer(container: Element | null) {
         this.props.container = container;

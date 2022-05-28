@@ -99,7 +99,7 @@ export class SwitchButtonContextBuilder {
             this.props.switchButtonState = switchButtonState;
             return (
                 <SwitchButtonContextProvider {...rest} switchButtonState={switchButtonState}>
-                    { children }
+                    {children}
                 </SwitchButtonContextProvider>
             );
         };
