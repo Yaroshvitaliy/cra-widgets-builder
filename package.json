@@ -21,6 +21,7 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
+    "cra-context-generator": "^1.0.0",
     "documentation": "^13.1.1",
     "react-app-rewired": "^2.1.8"
   },
@@ -29,7 +30,8 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "docs:api": "documentation build src/api/*.tsx --parse-extension tsx -f md -o docs/api.md"
+    "docs:api": "documentation build src/api/*.tsx --parse-extension tsx -f md -o docs/api.md",
+    "generate:contexts": "cra-generate-contexts ./contexts.json ./src/contexts"
   },
   "eslintConfig": {
     "extends": [
