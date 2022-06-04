@@ -1,5 +1,10 @@
 {
     "description": "Source code generation of React's state, context, context provider and context builder for the given types.",
+    "options": {
+        "majorVersion": {
+            "react-router-dom": 5 
+        }
+    },
     "types": [
         {
             "disable": false,
