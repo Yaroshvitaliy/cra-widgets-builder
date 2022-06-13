@@ -21,7 +21,7 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
-    "cra-context-generator": "^1.1.0",
+    "cra-context-generator": "^1.1.1",
     "documentation": "^13.1.1",
     "react-app-rewired": "^2.1.8"
   },
