@@ -22,7 +22,7 @@ const phrases: any = {
     }
 }
 
-export const translate = (phrase: string, language: string) =>
+export const translate = (phrase: string, language: string | undefined = 'en') =>
     (!!phrases[language] && !!phrases[language][phrase])
         ? phrases[language][phrase] as string
         : phrase;
